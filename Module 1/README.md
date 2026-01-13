@@ -68,4 +68,4 @@ If multiple answers are correct, select any
 ### Answer: postgres:5432 and db:5432
 
 ### Explanation
-Year can refer to the database both my the service and the container name; the internal port is in the both cases the same.
+You can refer to the database both my the service and the container name; the internal port is in the both cases the same.
