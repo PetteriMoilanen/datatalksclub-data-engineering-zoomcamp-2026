@@ -2,3 +2,5 @@
 [Data Engineering Zoomcamp 2026](https://datatalks.club/blog/guide-to-free-online-courses-at-datatalks-club.html#data-engineering-zoomcamp) exercise and project repository.
 
 Solutions to homework assignments are to be found in README files in the module subdirectories (Module_1, Module_2, etc.). 
+
+Data files (csv, parquet, etc.) used in exercises live in directory **data_files**.
