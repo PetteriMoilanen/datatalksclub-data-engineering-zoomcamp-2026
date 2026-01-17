@@ -211,3 +211,4 @@ __marimo__/
 *.parquet
 postgres_data/
 .vscode
+gc_key.json
