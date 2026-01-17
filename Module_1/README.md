@@ -197,6 +197,9 @@ Copy the files from the course repo
 
 Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 
+### Steps
+1. Terraform installed in the GitHub Codespace.
+
 ## Question 7. Terraform Workflow
 
 Which of the following sequences, respectively, describes the workflow for:
