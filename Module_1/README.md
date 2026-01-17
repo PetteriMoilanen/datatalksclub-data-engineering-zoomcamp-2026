@@ -14,7 +14,8 @@ What's the version of pip in the image?
 24.2.1
 23.3.1
 
-### Answer: 25.3
+### Answer
+25.3
 ### Steps
 1. Start a container with:
    *docker run -it --rm --entrypoint=bash python:3.13*
@@ -65,7 +66,66 @@ volumes:
 
 If multiple answers are correct, select any 
 
-### Answer: postgres:5432 and db:5432
+### Answer
+postgres:5432 and db:5432
 
 ### Explanation
 You can refer to the database both by the service and the container name; the internal port is in the both cases the same.
+
+## Note: SQL queries have been run in Jupyter notebook connected to database
+
+## Question 3. Counting short trips
+For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '2025-12-01', exclusive of the upper bound), how many trips had a trip_distance of less than or equal to 1 mile?
+
+- 7,853
+- 8,007
+- 8,254
+- 8,421
+
+### Answer
+8007
+
+### Query:
+```python
+query = text("""
+    SELECT count(*) 
+    FROM green_taxi_nov_2025 
+    WHERE lpep_pickup_datetime >= :start_date 
+      AND lpep_pickup_datetime < :end_date
+      AND trip_distance <= :distance
+""")
+
+with engine.connect() as conn:
+    result = conn.execute(query, {"start_date": "2025-11-01", "end_date": "2025-12-01", "distance": 1.0})
+    count = result.scalar()
+    print(count)
+```
+Note: I've been told that this is the most efficient way to choose by date with timestamp columns.
+
+## Question 4. Longest trip for each day
+Which was the pick up day with the longest trip distance? Only consider trips with trip_distance less than 100 miles (to exclude data errors).
+
+Use the pick up time for your calculations.
+
+- 2025-11-14
+- 2025-11-20
+- 2025-11-23
+- 2025-11-25
+
+### Answer
+2025-11-14
+### Query
+```python
+query = text("""
+    SELECT lpep_pickup_datetime 
+    FROM green_taxi_nov_2025 
+    WHERE trip_distance < :distance
+    ORDER BY trip_distance DESC
+    LIMIT 1
+""")
+
+with engine.connect() as conn:
+    result = conn.execute(query, {"distance": 100.0})
+    pickup_date = result.scalar()
+    print(pickup_date)
+```
