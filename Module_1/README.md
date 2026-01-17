@@ -202,7 +202,7 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 2. Created Google Cloud project **datatalks-de-zoomcamp-2026**.
 3. Created service account **petteri-terraform** with Viewer role.
 4. Created and downloaded JSON key for the service account.
-5. 
+5. Added file gc_key.json to .gitignore. 
 ## Question 7. Terraform Workflow
 
 Which of the following sequences, respectively, describes the workflow for:
