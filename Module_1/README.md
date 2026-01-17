@@ -72,7 +72,8 @@ postgres:5432 and db:5432
 ### Explanation
 You can refer to the database both by the service and the container name; the internal port is in the both cases the same.
 
-## Note: SQL queries have been run in Jupyter notebook connected to database
+## Note: SQL queries have been run in Jupyter notebook...
+...connected to database with the **sqlalchemy** library. See the [EDA notebook](./Taxi_EDA.ipynb) for details.
 
 ## Question 3. Counting short trips
 For the trips in November 2025 (lpep_pickup_datetime between '2025-11-01' and '2025-12-01', exclusive of the upper bound), how many trips had a trip_distance of less than or equal to 1 mile?
@@ -100,7 +101,6 @@ with engine.connect() as conn:
     count = result.scalar()
     print(count)
 ```
-Note: I've been told that this is the most efficient way to choose by date with timestamp columns.
 
 ## Question 4. Longest trip for each day
 Which was the pick up day with the longest trip distance? Only consider trips with trip_distance less than 100 miles (to exclude data errors).
@@ -128,4 +128,62 @@ with engine.connect() as conn:
     result = conn.execute(query, {"distance": 100.0})
     pickup_date = result.scalar()
     print(pickup_date)
+```
+
+## Question 5. Biggest pickup zone
+Which was the pickup zone with the largest total_amount (sum of all trips) on November 18th, 2025?
+
+- East Harlem North
+- East Harlem South
+- Morningside Heights
+- Forest Hills
+### Answer
+East Harlem North
+### Query
+```python
+query = text("""
+    SELECT t.zone, sum(g.fare_amount) as total_amount
+    FROM green_taxi_nov_2025 g 
+    INNER JOIN taxi_zones t ON g.pulocationid = t.locationid    
+    WHERE 
+        g.lpep_pickup_datetime >= :start_date
+    AND g.lpep_pickup_datetime < :next_date
+    GROUP BY t.zone
+    ORDER BY total_amount DESC
+""")
+df_temp = pd.read_sql(query, engine, params={"start_date": "2025-11-18", "next_date": "2025-11-19"})
+df_temp.head()
+```
+Note: I've been told that this is the most efficient way to choose by date with timestamp columns.
+
+## Question 6. Largest tip
+For the passengers picked up in the zone named "East Harlem North" in November 2025, which was the drop off zone that had the largest tip?
+
+Note: it's tip , not trip. We need the name of the zone, not the ID.
+
+- JFK Airport
+- Yorkville West
+- East Harlem North
+- LaGuardia Airport
+
+### Answer
+Yorkville West
+### Query
+```python
+query = text("""
+    WITH east_harlem_pickups AS (
+        SELECT t.zone, g.pulocationid, g.dolocationid, g.tip_amount, g.lpep_pickup_datetime
+    FROM green_taxi_nov_2025 g 
+    INNER JOIN taxi_zones t ON g.pulocationid = t.locationid    
+    WHERE 
+        t.zone = 'East Harlem North'
+    )
+    SELECT t.zone, e.tip_amount, e.lpep_pickup_datetime
+    FROM east_harlem_pickups e 
+    INNER JOIN taxi_zones t ON e.dolocationid = t.locationid    
+    ORDER BY e.tip_amount DESC
+    LIMIT 20         
+""")
+df_temp = pd.read_sql(query, engine)
+df_temp.head()
 ```
