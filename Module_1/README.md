@@ -209,7 +209,10 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 - gcloud auth application-default login 
 8. Added the required roles to the GC service account.
 9. Enabled the required GC APIs
-
+10. Created the Terraform files in **terraform** subdirectory.
+11. Run *terraform init/validate/plan/apply*.
+12. Checked the results
+13. Run *terraform destroy*. 
 
 ## Question 7. Terraform Workflow
 

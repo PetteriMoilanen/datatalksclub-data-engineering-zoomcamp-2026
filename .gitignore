@@ -212,3 +212,5 @@ __marimo__/
 postgres_data/
 Module_1/api_keys/
 .vscode
+terraform.tfstate*
+.terraform*
