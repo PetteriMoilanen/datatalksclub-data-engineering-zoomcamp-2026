@@ -204,6 +204,12 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 4. Created and downloaded JSON key for the service account and added the file to the Codespace.
 5. Added path to the JSON key to .gitignore. 
 6. Installed gcloud in the Codespace venv (see install_gcloud.sh). I really should get to grips with devcontainers, though...
+7. Run the shell commands:
+- export GOOGLE_APPLICATION_CREDENTIALS="Module_1/api_key/key.json"
+- gcloud auth application-default login 
+8. Added the required roles to the GC service account.
+9. Enabled the required GC APIs
+
 
 ## Question 7. Terraform Workflow
 
