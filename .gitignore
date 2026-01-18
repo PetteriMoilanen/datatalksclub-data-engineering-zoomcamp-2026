@@ -210,5 +210,5 @@ __marimo__/
 # Course-related stuff
 *.parquet
 postgres_data/
+Module_1/api_keys/
 .vscode
-gc_key.json
