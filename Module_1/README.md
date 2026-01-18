@@ -220,3 +220,6 @@ Answers:
 ### Answer
 - terraform init, terraform apply -auto-approve, terraform destroy
 ### Explanation
+- terraform init: workflow part 1
+- terraform apply -auto-approve: updates the infra without interactive prompts
+- terraform destroy: deletes every resource managed by the Terraform project
