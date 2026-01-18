@@ -203,6 +203,7 @@ Modify the files as necessary to create a GCP Bucket and Big Query Dataset.
 3. Created service account **petteri-terraform** with Viewer role.
 4. Created and downloaded JSON key for the service account and added the file to the Codespace.
 5. Added path to the JSON key to .gitignore. 
+6. Installed gcloud in the Codespace venv (see install_gcloud.sh). I really should get to grips with devcontainers, though...
 
 ## Question 7. Terraform Workflow
 
