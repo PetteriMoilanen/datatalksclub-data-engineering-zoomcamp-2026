@@ -4,6 +4,11 @@
 
 - Created [my own version of the Kestra flow](module2_gc_setup.yaml) to create the GC bucket and BQ dataset and another to delete them. The service account credentials are handled with Kestra secrets as described [here.](https://kestra.io/docs/how-to-guides/google-credentials)
 - Created [my own version of the Kestra flow](module2_taxi_ELT.yaml) for taxi data ELT for a single year and month. Creds with Kestra secrets as in the previous one and added csv file size logging for question 1.
+- For questions 3-5, created
+    - a [row counter flow](module2_row_count.yaml) that counts the rows of a single csv file (- the header row).
+    - a [main flow](module2_taxi_color_year_month_row_count.yaml) that either runs the row counter for a specific color/year/month if month given or loops all the months if not.
+    
+    Counts are logged so they can be viewed in Kestra UI.
 
 ## Questions and answers:
 
@@ -33,7 +38,7 @@ No explanation needed, I think. Also the filename in the previous question's run
 
 **Answer:** 24,648,499
 
-##### 4) How many rows are there for the `Green` Taxi data for all CSV files in the year 2020?
+#### 4) How many rows are there for the `Green` Taxi data for all CSV files in the year 2020?
 - 5,327,301
 - 936,199
 - 1,734,051
@@ -41,10 +46,20 @@ No explanation needed, I think. Also the filename in the previous question's run
 
 **Answer:** 1,734,051
 
-##### 5) How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
+#### 5) How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
 - 1,428,092
 - 706,911
 - 1,925,152
 - 2,561,031
 
 **Answer:** 1,925,152
+
+#### 6) How would you configure the timezone to New York in a Schedule trigger?
+- Add a `timezone` property set to `EST` in the `Schedule` trigger configuration  
+- Add a `timezone` property set to `America/New_York` in the `Schedule` trigger configuration
+- Add a `timezone` property set to `UTC-5` in the `Schedule` trigger configuration
+- Add a `location` property set to `New_York` in the `Schedule` trigger configuration  
+
+**Answer:** Add a `timezone` property set to `America/New_York` in the `Schedule` trigger configuration
+
+Source: https://kestra.io/plugins/core/trigger/io.kestra.plugin.core.trigger.schedule#properties_timezone-body
