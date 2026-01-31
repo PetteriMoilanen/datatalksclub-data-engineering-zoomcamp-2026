@@ -14,3 +14,21 @@
 - 692.6 MiB
 
 **Answer:** 128.3 MiB (or 134481400 bytes according to logs)
+
+#### 2) What is the rendered value of the variable `file` when the inputs `taxi` is set to `green`, `year` is set to `2020`, and `month` is set to `04` during execution?
+- `{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv` 
+- `green_tripdata_2020-04.csv`
+- `green_tripdata_04_2020.csv`
+- `green_tripdata_2020.csv`
+
+**Answer:** green_tripdata_2020-04.csv
+
+No explanation needed, I think. Also the filename in the previous question's run logs agrees.
+
+#### 3) How many rows are there for the `Yellow` Taxi data for all CSV files in the year 2020?
+- 13,537.299
+- 24,648,499
+- 18,324,219
+- 29,430,127
+
+**Answer:**
