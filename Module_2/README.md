@@ -3,7 +3,7 @@
 ## Things I've done:
 
 - Created [my own version of the Kestra flow](module2_gc_setup.yaml) to create the GC bucket and BQ dataset and another to delete them. The service account credentials are handled with Kestra secrets as described [here.](https://kestra.io/docs/how-to-guides/google-credentials)
-- Created [my own version of the Kestra flow](module2_taxi_ELT.yaml) for taxi data ELT for a single year and month.
+- Created [my own version of the Kestra flow](module2_taxi_ELT.yaml) for taxi data ELT for a single year and month. Creds with Kestra secrets as in the previous one and added csv file size logging for question 1.
 
 ## Questions and answers:
 
@@ -13,4 +13,4 @@
 - 364.7 MiB
 - 692.6 MiB
 
-**Answer:** 
+**Answer:** 128.3 MiB (or 134481400 bytes according to logs)
